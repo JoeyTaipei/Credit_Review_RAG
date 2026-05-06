@@ -61,9 +61,9 @@ data pipeline
 延伸說明可參考：
 
 ```text
-docs/kri_library_zh.md
-docs/risk_intelligent_dashboard_concept_zh.md
-docs/interview_risk_dashboard_pitch_zh.md
+PROJECT_GUIDE.md
+docs/concept/kri_library_zh.md
+docs/concept/risk_intelligent_dashboard_concept_zh.md
 ```
 
 ---
@@ -133,13 +133,22 @@ Credit_review_RAG/
 │   └── chroma_db_v2/               # 目前使用的 Chroma vector store，不建議 push
 │
 ├── docs/
-│   ├── aapl_rag_output.txt         # AAPL CLI 實際輸出
-│   ├── bby_rag_demo_output.txt     # BBY CLI 實際輸出
-│   ├── ford_rag_output.txt         # Ford 延伸測試輸出
-│   ├── mar_rag_output.txt          # MAR CLI 實際輸出
-│   ├── rag_demo_results.md         # 英文 demo 結果整理
-│   ├── rag_demo_results_zh.md      # 繁體中文 demo 結果整理
-│   └── interview_script_end_to_end_zh.md
+│   ├── README.md                   # docs 目錄導覽
+│   ├── concept/                    # 對外展示的 dashboard / KRI 概念文件
+│   │   ├── kri_library_zh.md
+│   │   └── risk_intelligent_dashboard_concept_zh.md
+│   │
+│   ├── demo_outputs/               # RAG demo 結果與原始 CLI outputs
+│   │   ├── rag_demo_results.md
+│   │   ├── rag_demo_results_zh.md
+│   │   ├── aapl_rag_output.txt
+│   │   ├── bby_rag_demo_output.txt
+│   │   ├── ford_rag_output.txt
+│   │   └── mar_rag_output.txt
+│   │
+│   └── _prep/                      # 自用面試準備，非主要展示文件
+│       ├── interview_script_end_to_end_zh.md
+│       └── interview_risk_dashboard_pitch_zh.md
 │
 ├── scripts/
 │   ├── fetch_edgar_filings.py      # 下載 SEC 10-K Risk Factors
@@ -150,6 +159,7 @@ Credit_review_RAG/
 │   └── rag_credit_qa.py            # RAG 問答主程式
 │
 ├── .gitignore
+├── PROJECT_GUIDE.md
 ├── requirements.txt
 └── README.md
 ```
@@ -226,18 +236,8 @@ python src\rag_credit_qa.py -t MAR -q "What risks does Marriott disclose about t
 整理後的 demo 結果放在：
 
 ```text
-docs/rag_demo_results_zh.md
+docs/demo_outputs/rag_demo_results_zh.md
 ```
-
-成功執行畫面可放在：
-
-```text
-docs/rag_demo_output.png
-```
-
-README 顯示如下：
-
-RAG Demo Output
 
 ---
 
