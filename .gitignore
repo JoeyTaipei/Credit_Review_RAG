@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+*.env
+data/chroma_db/
+data/chroma_db_v2/
+data/edgar_filings/
+*.zip
+.DS_Store
+Thumbs.db
