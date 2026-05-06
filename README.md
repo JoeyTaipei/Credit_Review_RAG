@@ -1,4 +1,5 @@
-# Credit Review RAG Extension  
+# Credit Review RAG Extension
+
 ### 使用 SEC 10-K Risk Factors 的信用風險文件問答模組
 
 本專案是一個 **RAG（Retrieval-Augmented Generation）文件問答 prototype**，用來示範如何將公司年報中的非結構化文字資料，轉換成可查詢、可追溯來源的風險分析工具。
@@ -29,25 +30,25 @@ What supply chain risks does Best Buy disclose?
 
 本專案展示三個能力：
 
-1. **非結構化資料處理**  
-   從 SEC 10-K 年報中擷取 Risk Factors 文字，並切分成適合檢索的 chunks。
-
-2. **RAG 問答流程**  
-   使用 embeddings 與 Chroma vector store 找出相關段落，再由 LLM 根據 retrieved context 產生回答。
-
-3. **可追溯來源的回答**  
-   每個回答都保留 source citations，避免讓 LLM 自由編造，並提高分析結果的可檢查性。
+1. **非結構化資料處理**
+  從 SEC 10-K 年報中擷取 Risk Factors 文字，並切分成適合檢索的 chunks。
+2. **RAG 問答流程**
+  使用 embeddings 與 Chroma vector store 找出相關段落，再由 LLM 根據 retrieved context 產生回答。
+3. **可追溯來源的回答**
+  每個回答都保留 source citations，避免讓 LLM 自由編造，並提高分析結果的可檢查性。
 
 ---
 
 ## 使用資料
 
-| 資料來源 | 說明 |
-|---|---|
-| SEC EDGAR | 美國上市公司公開揭露文件 |
-| Form 10-K | 年度報告 |
-| Item 1A. Risk Factors | 公司揭露的主要風險因素 |
-| Demo 公司 | AAPL、BBY、MAR |
+
+| 資料來源                  | 說明           |
+| --------------------- | ------------ |
+| SEC EDGAR             | 美國上市公司公開揭露文件 |
+| Form 10-K             | 年度報告         |
+| Item 1A. Risk Factors | 公司揭露的主要風險因素  |
+| Demo 公司               | AAPL、BBY、MAR |
+
 
 目前 demo 使用數家公司作為 prototype 測試。公司數量可以擴充，但目前專案重點是展示完整 RAG workflow，而不是建立大規模 production search system。
 
@@ -77,17 +78,19 @@ LLM 根據 retrieved context 回答
 
 ## 技術架構
 
-| 類別 | 工具 |
-|---|---|
-| 程式語言 | Python |
-| 資料來源 | SEC EDGAR |
-| 文件切分 | LangChain RecursiveCharacterTextSplitter |
-| Embedding Model | OpenAI text-embedding-3-small |
-| Vector Store | Chroma |
-| RAG Framework | LangChain LCEL |
-| LLM | OpenAI gpt-4o-mini |
-| 介面 | CLI；Streamlit 可選 |
-| 版本控制 | Git / GitHub |
+
+| 類別              | 工具                                       |
+| --------------- | ---------------------------------------- |
+| 程式語言            | Python                                   |
+| 資料來源            | SEC EDGAR                                |
+| 文件切分            | LangChain RecursiveCharacterTextSplitter |
+| Embedding Model | OpenAI text-embedding-3-small            |
+| Vector Store    | Chroma                                   |
+| RAG Framework   | LangChain LCEL                           |
+| LLM             | OpenAI gpt-4o-mini                       |
+| 介面              | CLI；Streamlit 可選                         |
+| 版本控制            | Git / GitHub                             |
+
 
 ---
 
@@ -197,7 +200,7 @@ docs/rag_demo_output.png
 
 README 顯示如下：
 
-![RAG Demo Output](docs/rag_demo_output.png)
+RAG Demo Output
 
 ---
 
@@ -222,14 +225,12 @@ RAG 適合這個問題，因為它可以：
 
 本專案使用三個設計降低 LLM 編造風險：
 
-1. **Context-only prompt**  
-   Prompt 要求模型只能使用 retrieved context 回答。
-
-2. **Temperature = 0**  
-   降低回答隨機性，讓輸出更穩定。
-
-3. **Source citations**  
-   每個回答都附上來源 chunk，讓使用者可以回到原始文件檢查。
+1. **Context-only prompt**
+  Prompt 要求模型只能使用 retrieved context 回答。
+2. **Temperature = 0**
+  降低回答隨機性，讓輸出更穩定。
+3. **Source citations**
+  每個回答都附上來源 chunk，讓使用者可以回到原始文件檢查。
 
 ---
 
@@ -249,13 +250,13 @@ RAG 適合這個問題，因為它可以：
 
 未來可以擴充：
 
-1. 加入更多公司與年度  
-2. 支援更多 10-K sections，例如 MD&A、Notes to Financial Statements  
-3. 加入新聞、產業報告或公司公告  
-4. 建立 RAG evaluation，例如 Recall@k 與 faithfulness  
-5. 改用 pgvector，和 PostgreSQL 分析流程整合  
-6. 建立 Streamlit UI，讓使用者可選公司並輸入問題  
-7. 將 RAG 回答加入自動化信用審查報告初稿  
+1. 加入更多公司與年度
+2. 支援更多 10-K sections，例如 MD&A、Notes to Financial Statements
+3. 加入新聞、產業報告或公司公告
+4. 建立 RAG evaluation，例如 Recall@k 與 faithfulness
+5. 改用 pgvector，和 PostgreSQL 分析流程整合
+6. 建立 Streamlit UI，讓使用者可選公司並輸入問題
+7. 將 RAG 回答加入自動化信用審查報告初稿
 
 ---
 
