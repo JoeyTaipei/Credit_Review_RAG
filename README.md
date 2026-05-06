@@ -39,6 +39,35 @@ What supply chain risks does Best Buy disclose?
 
 ---
 
+## How this project simulates a Risk Intelligent Dashboard
+
+這個專案可以被定位成一個小型 **Risk Intelligent Dashboard prototype**。結構化分析主軸負責計算 KRI、監控異常、產生風險排序與 dashboard；RAG extension 則補足公開揭露文件中的質化風險訊號。
+
+整體概念是：
+
+```text
+data pipeline
+→ KRI monitoring
+→ anomaly detection
+→ risk ranking
+→ Tableau visualization
+→ drill-down report
+→ RAG Q&A with source citations
+→ human-in-the-loop review
+```
+
+這個定位的重點不是宣稱 production-ready，也不是自動做正式決策，而是展示如何把數字指標、視覺化、文件檢索和人工覆核串成一個可解釋的分析流程。
+
+延伸說明可參考：
+
+```text
+docs/kri_library_zh.md
+docs/risk_intelligent_dashboard_concept_zh.md
+docs/interview_risk_dashboard_pitch_zh.md
+```
+
+---
+
 ## 使用資料
 
 
@@ -99,25 +128,33 @@ LLM 根據 retrieved context 回答
 ```text
 Credit_review_RAG/
 ├── data/
-│   ├── edgar_filings/          # SEC 10-K Risk Factors 原文，不建議 push
-│   └── chroma_db_v2/           # Chroma vector store，不建議 push
+│   ├── edgar_filings/              # SEC 10-K Risk Factors 原文，不建議 push
+│   ├── chroma_db/                  # 舊版 Chroma vector store，不建議 push
+│   └── chroma_db_v2/               # 目前使用的 Chroma vector store，不建議 push
 │
 ├── docs/
-│   ├── rag_demo_output.png     # Demo 截圖
-│   └── rag_demo_results_zh.md  # Demo 結果整理
+│   ├── aapl_rag_output.txt         # AAPL CLI 實際輸出
+│   ├── bby_rag_demo_output.txt     # BBY CLI 實際輸出
+│   ├── ford_rag_output.txt         # Ford 延伸測試輸出
+│   ├── mar_rag_output.txt          # MAR CLI 實際輸出
+│   ├── rag_demo_results.md         # 英文 demo 結果整理
+│   ├── rag_demo_results_zh.md      # 繁體中文 demo 結果整理
+│   └── interview_script_end_to_end_zh.md
 │
 ├── scripts/
-│   ├── fetch_edgar_filings.py  # 下載 SEC 10-K Risk Factors
-│   ├── build_vector_store.py   # 建立 embeddings 與 vector store
-│   └── demo_app.py             # Streamlit demo，可選
+│   ├── fetch_edgar_filings.py      # 下載 SEC 10-K Risk Factors
+│   ├── build_vector_store.py       # 建立 embeddings 與 Chroma vector store
+│   └── demo_app.py                 # Streamlit demo，可選
 │
 ├── src/
-│   └── rag_credit_qa.py        # RAG 問答主程式
+│   └── rag_credit_qa.py            # RAG 問答主程式
 │
-├── requirements.txt
 ├── .gitignore
+├── requirements.txt
 └── README.md
 ```
+
+> 註：`.env`、`.venv/`、`data/chroma_db/`、`data/chroma_db_v2/` 等本機設定與向量資料庫已列入 `.gitignore`，不應上傳到 GitHub。
 
 ---
 
